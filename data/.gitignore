@@ -1,0 +1,2 @@
+# Ignore CSV files for now in lieu of using Git LFS
+*.csv
