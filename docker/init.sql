@@ -1,4 +1,4 @@
 CREATE DATABASE ppdb;
 \c ppdb
 CREATE EXTENSION citus;
-CREATE EXTENSION pgsphere;
+CREATE EXTENSION pg_sphere;
