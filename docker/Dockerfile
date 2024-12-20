@@ -6,10 +6,11 @@ FROM citusdata/citus:latest
 
 # Install required dependencies
 RUN apt-get update && apt-get install -y \
-    git gcc g++ make wget tar \
+    git gcc g++ make wget \
     postgresql-server-dev-16 \
-    libcfitsio-dev \
-    libfftw3-dev
+    libcfitsio-dev
+    #\
+    #libfftw3-dev
 
 # Download and build healpix
 RUN wget -O healpix.tar.gz "https://sourceforge.net/projects/healpix/files/Healpix_3.83/Healpix_3.83_2024Nov13.tar.gz/download" && \
