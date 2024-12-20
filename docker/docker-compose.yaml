@@ -1,6 +1,8 @@
 services:
   controller:
-    image: citusdata/citus:latest
+    build:
+      context: .
+    container_name: citus-controller
     environment:
       POSTGRES_HOST_AUTH_METHOD: trust
       CITUS_NODE_ROLE: coordinator
@@ -8,16 +10,25 @@ services:
       - "5432:5432"
     volumes:
       - ./init.sql:/docker-entrypoint-initdb.d/init.sql
-    deploy:
-      replicas: 1
 
-  worker:
-    image: citusdata/citus:latest
+  worker1:
+    build:
+      context: .
+    container_name: citus-worker-01
     environment:
       POSTGRES_HOST_AUTH_METHOD: trust
       CITUS_NODE_ROLE: worker
       CITUS_MASTER_HOST: controller
     volumes:
       - ./init.sql:/docker-entrypoint-initdb.d/init.sql
-    deploy:
-      replicas: 2
+
+  worker2:
+    build:
+      context: .
+    container_name: citus-worker-02
+    environment:
+      POSTGRES_HOST_AUTH_METHOD: trust
+      CITUS_NODE_ROLE: worker
+      CITUS_MASTER_HOST: controller
+    volumes:
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
